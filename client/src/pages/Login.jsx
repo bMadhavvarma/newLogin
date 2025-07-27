@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 // 🔔 Toast Functions
 const showSuccessToast = (message) => {
   toast.success(message, {
@@ -21,6 +22,7 @@ const showErrorToast = (message) => {
 
 // ✅ LOGIN COMPONENT
 const Login = () => {
+  const API = import.meta.env.VITE_API_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/login", {
+      const res = await axios.post(`${API}/login`, {
         email,
         password,
       });
@@ -89,7 +91,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="bg-purple-900 text-white rounded-2xl h-10 mt-4 w-full text-center"
+          className="bg-purple-900 text-white rounded-2xl h-10 mt-4 w-full text-center cursor-pointer"
         >
           Sign In
         </button>
@@ -109,6 +111,8 @@ const Login = () => {
 
 // ✅ SIGNUP COMPONENT
 const SignUp = () => {
+  const API = import.meta.env.VITE_API_URL;
+
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -132,7 +136,7 @@ const SignUp = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/signup", {
+      const res = await axios.post(`${API}/signup`, {
         email,
         userName: name,
         password,
@@ -201,7 +205,7 @@ const SignUp = () => {
 
         <button
           type="submit"
-          className="bg-purple-900 text-white rounded-2xl h-10 mt-4 w-full text-center"
+          className="bg-purple-900 text-white rounded-2xl h-10 mt-4 w-full text-center cursor-pointer"
         >
           Sign Up
         </button>
