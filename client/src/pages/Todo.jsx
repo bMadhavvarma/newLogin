@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaTimes, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const showSuccessToast = (message) => {
+  toast.success(message, {
+    position: "top-center",
+    autoClose: 2000,
+  });
+};
+
+
 
 const Todo = () => {
   const [taskList, setTaskList] = useState([]);
@@ -47,7 +57,8 @@ const Todo = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    setTimeout(() => navigate("/login"), 1000); // Immediately go to login
+    showSuccessToast("Logout successful! Redirecting...");
+    setTimeout(() => navigate("/login"), 2000); // Immediately go to login
   };
   
 
@@ -74,6 +85,7 @@ const Todo = () => {
       if (res.ok) {
         const created = await res.json();
         setTaskList([...taskList, created]);
+        showSuccessToast("Task added successful!");
         resetForm();
       }
     } catch (err) {
@@ -152,6 +164,7 @@ const Todo = () => {
       if (res.ok) {
         const updated = await res.json();
         setTaskList(taskList.map((task) => (task._id === editTaskId ? updated : task)));
+        showSuccessToast("Task updated successful!");
         resetForm();
       }
     } catch (err) {
@@ -314,6 +327,7 @@ const Todo = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
