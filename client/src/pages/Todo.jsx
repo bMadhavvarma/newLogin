@@ -171,7 +171,7 @@ const Todo = () => {
       case "high":
         return "border-red-500";
       case "medium":
-        return "border-yellow-400";
+        return "border-purple-700";
       case "low":
         return "border-gray-400";
       default:
